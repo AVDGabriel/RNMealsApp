@@ -1,7 +1,6 @@
 import React from 'react';
-import { View, StyleSheet, Text, Button, FlatList, TouchableOpacity, Platform } from 'react-native';
+import { View, StyleSheet, Text, FlatList, TouchableOpacity } from 'react-native';
 import { CATEGORIES } from '../data/dummy-data';
-import Colors from '../constants/Colors';
 
 
 const CategoriesScreen = props => {
@@ -29,14 +28,6 @@ const CategoriesScreen = props => {
         //FlatList in order to not get an error for key.
         <FlatList data={CATEGORIES} renderItem={renderGridItem} numColumns={2} />
     );
-};
-
-CategoriesScreen.navigationOptions = {
-    headerTitle: 'Meal Categories',
-    headerStyle: {
-        backgroundColor: Platform.OS === 'android' ? Colors.primaryColor : '',
-    },
-    headerTintColor: Platform.OS === 'android' ? 'white' : Colors.primaryColor
 };
 
 const styles = StyleSheet.create({
