@@ -1,7 +1,7 @@
 import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
 import CategoriesScreen from '../screens/CategoriesScreen';
-import CategorieMealsScreen from '../screens/CategoryMealsScreen';
+import CategoryMealsScreen from '../screens/CategoryMealsScreen';
 import MealDetailsScreen from '../screens/MealDetailsScreen';
 
 const MealsNavigator = createStackNavigator({
@@ -10,7 +10,7 @@ const MealsNavigator = createStackNavigator({
     //This is a shorter version of writting the above line of code. 
     //Here we can add more configurations to the navigation.
     CategoryMeals: {
-        screen: CategorieMealsScreen
+        screen: CategoryMealsScreen
     },
     MealDetails: {
         screen: MealDetailsScreen

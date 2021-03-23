@@ -1,11 +1,20 @@
 import React from 'react';
-import { View, StyleSheet, Text, Button } from 'react-native';
+import { View, StyleSheet, Text, Button, Platform } from 'react-native';
+import { CATEGORIES } from '../data/dummy-data';
+import Colors from '../constants/Colors';
 
-const CategorieMealsScreen = props => {
+const CategoryMealsScreen = props => {
+
+    const catId = props.navigation.getParam('categoryId');
+    const selectedCategory = CATEGORIES.find(x => x.id === catId);
+
     return (
         <View style={styles.screen}>
             <Text>
                 The categorie meals screen
+            </Text>
+            <Text>
+                {selectedCategory.title}
             </Text>
             <Button title="Go to meal details" onPress={() => {
                 //Variant 1.
@@ -25,6 +34,20 @@ const CategorieMealsScreen = props => {
     );
 };
 
+CategoryMealsScreen.navigationOptions = (navigationData) => {
+    // console.log(navigationData.navigation);
+    const catId = navigationData.navigation.getParam('categoryId');
+    const selectedCategory = CATEGORIES.find(x => x.id === catId);
+
+    return {
+        headerTitle: selectedCategory.title,
+        headerStyle: {
+            backgroundColor: Platform.OS === 'android' ? Colors.primaryColor : '',
+        },
+        headerTintColor: Platform.OS === 'android' ? 'white' : Colors.primaryColor
+    };
+}
+
 const styles = StyleSheet.create({
     screen: {
         flex: 1,
@@ -33,4 +56,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default CategorieMealsScreen;
+export default CategoryMealsScreen;
