@@ -1,22 +1,22 @@
 import React from 'react';
-import { View, StyleSheet, Text, Button } from 'react-native';
+import { View, StyleSheet, Text, Button, FlatList } from 'react-native';
+import { CATEGORIES } from '../data/dummy-data';
+
+const renderGridItem = (itemData) => {
+    return (
+        <View style={styles.gridItem}>
+            <Text>
+                {itemData.item.title}
+            </Text>
+        </View>
+    );
+};
 
 const CategoriesScreen = props => {
     return (
-        <View style={styles.screen}>
-            <Text>
-                The categories screen
-            </Text>
-            <Button title="Go to meals" onPress={() => {
-                props.navigation.navigate({ routeName: 'CategoryMeals' });
-                //Variant 2 - you go to the second screen, but you can not go back because 
-                //this functions doesn't add the second screen to the stack.
-                //Variant 2 -takes only the string identifier as a value.
-                //Variant 2 can be used on login screen when you don't want the user to be 
-                //able to go back to the login screen once he is logged in.
-                //props.navigation.replace('CategoryMeals');
-            }} />
-        </View>
+        //In older versions you have to use the keyExtractor property of the 
+        //FlatList in order to not get an error for key.
+        <FlatList data={CATEGORIES} renderItem={renderGridItem} numColumns={2} />
     );
 };
 
@@ -25,6 +25,11 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center'
+    },
+    gridItem: {
+        flex: 1,
+        margin: 15,
+        height: 150
     }
 });
 
