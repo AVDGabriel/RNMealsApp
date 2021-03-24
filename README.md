@@ -1,0 +1,2 @@
+# RNMealsApp
+This is a react native app realized based on the React Native The Practical Guide course from Udemy. The link to it can be found here: https://www.udemy.com/course/react-native-the-practical-guide/?utm_source=adwords&amp;utm_medium=udemyads&amp;utm_campaign=LongTail-New_la.EN_cc.ROWMTA-B&amp;utm_content=deal4584&amp;utm_term=_._ag_98771201205_._ad_432423630422_._kw__._de_c_._dm__._pl__._ti_dsa-1007766171312_._li_1011828_._pd__._&amp;matchtype=b&amp;gclid=EAIaIQobChMIubnM0rjG7wIVVEeRBR1KCg8xEAAYASAAEgKJ0_D_BwE
