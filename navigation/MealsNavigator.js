@@ -10,6 +10,8 @@ import Colors from '../constants/Colors';
 import FavoritesScreen from '../screens/FavoritesScreen';
 import { Ionicons } from '@expo/vector-icons';
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
+import { createDrawerNavigator } from 'react-navigation-drawer';
+import FiltersScreen from '../screens/FiltersScreen';
 
 const MealsNavigator = createStackNavigator({
     //We can use any identifier as a property name.
@@ -93,4 +95,18 @@ const MealFavTabNavigator = Platform.OS === 'android'
         }
     });
 
-export default createAppContainer(MealFavTabNavigator);
+const FiltersNavigator = createStackNavigator({
+    Filters: {
+        screen: FiltersScreen,
+        navigationOptions: {
+            headerTitle: 'Filters'
+        }
+    }
+});
+
+const MainNavigator = createDrawerNavigator({
+    MealsFavs: MealFavTabNavigator,
+    Filters: FiltersNavigator
+});
+
+export default createAppContainer(MainNavigator);
