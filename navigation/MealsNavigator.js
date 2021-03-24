@@ -9,31 +9,31 @@ import { Platform } from 'react-native';
 import Colors from '../constants/Colors';
 import FavoritesScreen from '../screens/FavoritesScreen';
 import { Ionicons } from '@expo/vector-icons';
-import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs'
+import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 
 const MealsNavigator = createStackNavigator({
     //We can use any identifier as a property name.
-    Categories: {
-        screen: CategoriesScreen,
-        headerOptions: {
-            headerTitle: 'Meal Categories'
-        }
-    },
-    //This is a shorter version of writting the above line of code. 
-    //Here we can add more configurations to the navigation.
-    CategoryMeals: {
-        screen: CategoryMealsScreen
-    },
-    MealDetails: {
-        screen: MealDetailsScreen
-    }
+    Categories: CategoriesScreen,
+    CategoryMeals: CategoryMealsScreen,
+    MealDetails: MealDetailsScreen
 }, {
-    initialRouteName: 'Categories',
     defaultNavigationOptions: {
         headerStyle: {
             backgroundColor: Platform.OS === 'android' ? Colors.primaryColor : '',
         },
         headerTintColor: Platform.OS === 'android' ? 'white' : Colors.primaryColor
+    }
+});
+
+const FavNavigator = createStackNavigator({
+    Favorites: FavoritesScreen,
+    MealDetail: MealDetailsScreen
+}, {
+    defaultNavigationOptions: {
+        headerStyle: {
+            backgroundColor: Platform.OS === 'android' ? Colors.accentColor : '',
+        },
+        headerTintColor: Platform.OS === 'android' ? 'white' : Colors.accentColor
     }
 });
 
@@ -55,7 +55,7 @@ const tabScreenConfig = {
         }
     },
     Favorites: {
-        screen: FavoritesScreen,
+        screen: FavNavigator,
         navigationOptions: {
             tabBarLabel: "Favorites",
             tabBarIcon: (tabInfo) => {

@@ -13,7 +13,8 @@ const CategoriesScreen = props => {
                 color={itemData.item.color}
                 onSelect={() => {
                     props.navigation.navigate({
-                        routeName: 'CategoryMeals', params: {
+                        routeName: 'CategoryMeals',
+                        params: {
                             categoryId: itemData.item.id
                         }
                     });
@@ -26,6 +27,10 @@ const CategoriesScreen = props => {
         //FlatList in order to not get an error for key.
         <FlatList data={CATEGORIES} renderItem={renderGridItem} numColumns={2} />
     );
+};
+
+CategoriesScreen.navigationOptions = {
+    headerTitle: 'Meal Categories'
 };
 
 const styles = StyleSheet.create({
