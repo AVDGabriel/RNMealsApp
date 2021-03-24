@@ -1,10 +1,12 @@
 import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 import CategoriesScreen from '../screens/CategoriesScreen';
 import CategoryMealsScreen from '../screens/CategoryMealsScreen';
 import MealDetailsScreen from '../screens/MealDetailsScreen';
 import { Platform } from 'react-native';
 import Colors from '../constants/Colors';
+import FavoritesScreen from '../screens/FavoritesScreen';
 
 const MealsNavigator = createStackNavigator({
     //We can use any identifier as a property name.
@@ -32,6 +34,11 @@ const MealsNavigator = createStackNavigator({
     }
 });
 
+const MealFavTabNavigator = createBottomTabNavigator({
+    Meals: {
+        screen: MealsNavigator
+    },
+    Favorites: FavoritesScreen
+});
 
-
-export default createAppContainer(MealsNavigator);
+export default createAppContainer(MealFavTabNavigator);
