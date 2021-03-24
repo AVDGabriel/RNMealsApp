@@ -5,13 +5,22 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 import CategoriesScreen from '../screens/CategoriesScreen';
 import CategoryMealsScreen from '../screens/CategoryMealsScreen';
 import MealDetailsScreen from '../screens/MealDetailsScreen';
-import { Platform } from 'react-native';
+import { Platform, Text } from 'react-native';
 import Colors from '../constants/Colors';
 import FavoritesScreen from '../screens/FavoritesScreen';
 import { Ionicons } from '@expo/vector-icons';
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 import { createDrawerNavigator } from 'react-navigation-drawer';
 import FiltersScreen from '../screens/FiltersScreen';
+
+const headerTitleStyles = {
+    headerTitleStyle: {
+        fontFamily: 'open-sans-bold'
+    },
+    headerBackTitleStyle: {
+        fontFamily: 'open-sans'
+    }
+};
 
 const MealsNavigator = createStackNavigator({
     //We can use any identifier as a property name.
@@ -20,6 +29,7 @@ const MealsNavigator = createStackNavigator({
     MealDetails: MealDetailsScreen
 }, {
     defaultNavigationOptions: {
+        ...headerTitleStyles,
         headerStyle: {
             backgroundColor: Platform.OS === 'android' ? Colors.primaryColor : '',
         },
@@ -32,6 +42,7 @@ const FavNavigator = createStackNavigator({
     MealDetails: MealDetailsScreen
 }, {
     defaultNavigationOptions: {
+        ...headerTitleStyles,
         headerStyle: {
             backgroundColor: Platform.OS === 'android' ? Colors.accentColor : '',
         },
@@ -53,7 +64,11 @@ const tabScreenConfig = {
             },
             //This works just if the shifting prop from createMaterialBottomTabNavigator 
             //function is set to true.
-            tabBarColor: Colors.primaryColor
+            tabBarColor: Colors.primaryColor,
+            // tabBarLabel:"Meals!!!",
+            tabBarLabel: Platform.OS === 'android'
+                ? <Text style={{ fontFamily: 'open-sans' }}>Meals</Text>
+                : "Meals"
         }
     },
     Favorites: {
@@ -69,7 +84,11 @@ const tabScreenConfig = {
             },
             //This works just if the shifting prop from createMaterialBottomTabNavigator 
             //function is set to true.
-            tabBarColor: Colors.accentColor
+            tabBarColor: Colors.accentColor,
+            // tabBarLabel:"Favorites!!!",
+            tabBarLabel: Platform.OS === 'android'
+                ? <Text style={{ fontFamily: 'open-sans' }}>Favorites</Text>
+                : "Favorites"
         }
     }
 };
@@ -91,6 +110,9 @@ const MealFavTabNavigator = Platform.OS === 'android'
     : createBottomTabNavigator(
         tabScreenConfig, {
         tabBarOptions: {
+            labelStyle: {
+                fontFamily: 'open-sans-bold'
+            },
             activeTintColor: Colors.accentColor
         }
     });
