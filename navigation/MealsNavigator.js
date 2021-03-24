@@ -102,11 +102,35 @@ const FiltersNavigator = createStackNavigator({
             headerTitle: 'Filters'
         }
     }
+}, {
+    defaultNavigationOptions: {
+        headerStyle: {
+            backgroundColor: Platform.OS === 'android' ? Colors.primaryColor : '',
+        },
+        headerTintColor: Platform.OS === 'android' ? 'white' : Colors.primaryColor
+    }
 });
 
 const MainNavigator = createDrawerNavigator({
-    MealsFavs: MealFavTabNavigator,
-    Filters: FiltersNavigator
+    MealsFavs: {
+        screen: MealFavTabNavigator,
+        navigationOptions: {
+            drawerLabel: 'Meals'
+        }
+    },
+    Filters: {
+        screen: FiltersNavigator,
+        navigationOptions: {
+            drawerLabel: 'Filters'
+        }
+    }
+}, {
+    contentOptions: {
+        activeTintColor: Colors.accentColor,
+        labelStyle: {
+            fontFamily: 'open-sans-bold'
+        }
+    }
 });
 
 export default createAppContainer(MainNavigator);
