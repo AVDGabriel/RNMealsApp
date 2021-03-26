@@ -1,11 +1,15 @@
 import React from 'react';
 import { StyleSheet, View, FlatList } from 'react-native';
 import MealItem from '../components/MealItem';
+import { useSelector } from 'react-redux';
 
 const MealList = props => {
     const { navigation, data, style } = props;
+    const favoriteMeals = useSelector(state => state.meals.favoriteMeals);
 
     const renderMealItem = itemData => {
+        //The some() function returns true if any item matches the condition.
+        const isFav = favoriteMeals.some(x => x.id === itemData.item.id);
         return (<MealItem
             title={itemData.item.title}
             image={itemData.item.imageUrl}
@@ -17,7 +21,8 @@ const MealList = props => {
                     routeName: 'MealDetails',
                     params: {
                         mealId: itemData.item.id,
-                        mealTitle: itemData.item.title
+                        mealTitle: itemData.item.title,
+                        isFav: isFav
                     }
                 });
             }} />);

@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, isValidElement } from 'react';
 import {
     View,
     StyleSheet,
@@ -24,6 +24,7 @@ const MealDetailsScreen = props => {
     const { navigation } = props;
     const mealId = navigation.getParam('mealId');
     const availableMeals = useSelector(state => state.meals.meals);
+    const currentMealIsFavorite = useSelector(state => state.meals.favoriteMeals.some(meal => meal.id === mealId));
     const selectedMeal = availableMeals.find(x => x.id === mealId);
 
     const dispatch = useDispatch();
@@ -35,6 +36,10 @@ const MealDetailsScreen = props => {
     useEffect(() => {
         navigation.setParams({ toggleFav: toggleFavoriteHandler });
     }, [toggleFavoriteHandler]);
+
+    useEffect(() => {
+        navigation.setParams({ isFav: currentMealIsFavorite });
+    }, [currentMealIsFavorite]);
 
     return (
         <ScrollView>
@@ -73,11 +78,12 @@ const MealDetailsScreen = props => {
 MealDetailsScreen.navigationOptions = (navigationData) => {
     mealTitle = navigationData.navigation.getParam('mealTitle');
     const toggleFavorite = navigationData.navigation.getParam('toggleFav');
+    const isFav = navigationData.navigation.getParam('isFav');
 
     return {
         headerTitle: mealTitle,
         headerRight: () => (<HeaderButtons HeaderButtonComponent={HeaderButton}>
-            <Item title="Favorite" iconName="ios-star" onPress={toggleFavorite} />
+            <Item title="Favorite" iconName={isFav ? "ios-star" : "ios-star-outline"} onPress={toggleFavorite} />
         </HeaderButtons>)
     };
 };
