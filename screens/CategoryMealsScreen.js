@@ -1,11 +1,16 @@
 import React from 'react';
-import { CATEGORIES, MEALS } from '../data/dummy-data';
+import { CATEGORIES } from '../data/dummy-data';
 import MealList from '../components/MealList';
+import { useSelector } from 'react-redux';
 
 const CategoryMealsScreen = props => {
 
     const catId = props.navigation.getParam('categoryId');
-    const displayedMeals = MEALS.filter(x => x.categoryIds.indexOf(catId) >= 0);
+    //We always wnt to display the meals that are filtered by the user, 
+    //that's why we use the filteredMeals in the useSelector hook.
+    const availableMeals = useSelector(state => state.meals.filteredMeals);
+
+    const displayedMeals = availableMeals.filter(x => x.categoryIds.indexOf(catId) >= 0);
 
     return (
         <MealList data={displayedMeals} navigation={props.navigation} />
